@@ -1,0 +1,197 @@
+[
+  [
+    "L1-1",
+    [
+      "pwd"
+    ]
+  ],
+  [
+    "L1-2",
+    [
+      "ls"
+    ]
+  ],
+  [
+    "L1-3",
+    [
+      "cd logs"
+    ]
+  ],
+  [
+    "L1-4",
+    [
+      "cd /srv/data"
+    ]
+  ],
+  [
+    "L1-5",
+    [
+      "cd /srv/data/backups"
+    ]
+  ],
+  [
+    "L2-1",
+    [
+      "touch notes.txt"
+    ]
+  ],
+  [
+    "L2-2",
+    [
+      "mkdir backup"
+    ]
+  ],
+  [
+    "L2-3",
+    [
+      "cat readme.txt"
+    ]
+  ],
+  [
+    "L2-4",
+    [
+      "cp readme.txt archive/readme.txt"
+    ]
+  ],
+  [
+    "L2-5",
+    [
+      "mkdir backup",
+      "cp readme.txt backup/readme.txt",
+      "mv notes.txt backup/operations.txt"
+    ]
+  ],
+  [
+    "L3-1",
+    [
+      "grep ERROR logs/app.log"
+    ]
+  ],
+  [
+    "L3-2",
+    [
+      "find /srv -name crash-report.txt"
+    ]
+  ],
+  [
+    "L3-3",
+    [
+      "tail -n 10 logs/app.log"
+    ]
+  ],
+  [
+    "L3-4",
+    [
+      "wc -l logs/app.log"
+    ]
+  ],
+  [
+    "L3-5",
+    [
+      "grep ERROR logs/app.log"
+    ]
+  ],
+  [
+    "L4-1",
+    [
+      "grep ERROR logs/app.log > errors.txt"
+    ]
+  ],
+  [
+    "L4-2",
+    [
+      "sort data/hosts.txt > sorted.txt"
+    ]
+  ],
+  [
+    "L4-3",
+    [
+      "sort data/hosts.txt | uniq > unique.txt"
+    ]
+  ],
+  [
+    "L4-4",
+    [
+      "grep ERROR logs/app.log | head -n 1 > first-error.txt"
+    ]
+  ],
+  [
+    "L4-5",
+    [
+      "grep ERROR logs/app.log | sort | uniq > archive/report.txt"
+    ]
+  ],
+  [
+    "L5-1",
+    [
+      "ls -l /etc/web/config"
+    ]
+  ],
+  [
+    "L5-2",
+    [
+      "chmod 644 /etc/web/config"
+    ]
+  ],
+  [
+    "L5-3",
+    [
+      "ps",
+      "kill 42"
+    ]
+  ],
+  [
+    "L5-4",
+    [
+      "df",
+      "du -a /var/log"
+    ]
+  ],
+  [
+    "L5-5",
+    [
+      "chmod 644 /etc/web/config",
+      "kill 42"
+    ]
+  ],
+  [
+    "L6-1",
+    [
+      "systemctl status web",
+      "journalctl -u web"
+    ]
+  ],
+  [
+    "L6-2",
+    [
+      "cat /dev/null > /var/log/archive.log"
+    ]
+  ],
+  [
+    "L6-3",
+    [
+      "chmod 644 /etc/web/config"
+    ]
+  ],
+  [
+    "L6-4",
+    [
+      "chmod 644 /etc/web/config",
+      "systemctl restart web"
+    ]
+  ],
+  [
+    "L6-5",
+    [
+      "systemctl status web",
+      "journalctl -u web",
+      "df -h",
+      "du -ah /var/log",
+      "ps",
+      "kill 42",
+      "chmod 644 /etc/web/config",
+      "cat /dev/null > /var/log/archive.log",
+      "systemctl restart web"
+    ]
+  ]
+]

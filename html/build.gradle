@@ -1,0 +1,45 @@
+// The same source/module layout as gdx-liftoff, with explicit GWT tasks to keep
+// the small build independent of a third-party Gradle GWT plugin.
+configurations { gwtCompiler }
+dependencies {
+    implementation project(':core')
+    implementation "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
+    gwtCompiler "org.gwtproject:gwt-dev:$gwtVersion"
+    gwtCompiler "org.gwtproject:gwt-user:$gwtVersion"
+    gwtCompiler "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
+    gwtCompiler "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
+    gwtCompiler "com.google.jsinterop:jsinterop-annotations:2.0.0:sources"
+}
+tasks.register('compileGwt', JavaExec) {
+    group = 'build'
+    description = 'Compile the actual Java game to browser JavaScript using GWT.'
+    dependsOn ':core:classes', 'classes'
+    mainClass = 'com.google.gwt.dev.Compiler'
+    classpath = configurations.gwtCompiler + sourceSets.main.runtimeClasspath +
+            files('src/main/java', 'src/main/resources', '../core/src/main/java', '../core/src/main/resources')
+    workingDir = projectDir
+    maxHeapSize = '2g'
+    inputs.files(fileTree('src'), fileTree('../core/src/main'), fileTree('../assets'))
+    outputs.dir layout.buildDirectory.dir('gwt')
+    outputs.dir file('war/assets')
+    args '-war', layout.buildDirectory.dir('gwt').get().asFile.absolutePath,
+            '-workDir', layout.buildDirectory.dir('gwt-work').get().asFile.absolutePath,
+            '-localWorkers', '2', '-sourceLevel', '1.8', '-strict', '-optimize', '9',
+            'jp.terminalquest.GdxDefinition'
+}
+tasks.register('dist', Sync) {
+    group = 'build'
+    description = 'Build a static, GitHub Pages-compatible Web release.'
+    dependsOn 'compileGwt'
+    into layout.buildDirectory.dir('dist')
+    from(layout.buildDirectory.dir('gwt')) { exclude '**/symbolMaps/**', '**/*.symbolMap' }
+    from('war')
+    from('webapp')
+}
+tasks.register('distZip', Zip) {
+    dependsOn 'dist'
+    from layout.buildDirectory.dir('dist')
+    archiveFileName = 'terminal-quest-web.zip'
+    destinationDirectory = layout.buildDirectory
+}
+tasks.named('clean') { delete 'war' }

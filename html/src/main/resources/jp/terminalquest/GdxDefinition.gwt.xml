@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="html">
+  <inherits name="jp.terminalquest.TerminalQuest"/>
+  <source path="gwt"/>
+  <entry-point class="jp.terminalquest.gwt.GwtLauncher"/>
+  <set-configuration-property name="gdx.assetpath" value="../assets"/>
+  <set-configuration-property name="xsiframe.failIfScriptTag" value="FALSE"/>
+  <set-property name="user.agent" value="safari"/>
+  <set-property name="locale" value="default"/>
+</module>

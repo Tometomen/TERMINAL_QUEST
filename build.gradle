@@ -1,0 +1,25 @@
+allprojects {
+    group = 'jp.terminalquest'
+    version = '1.0.0'
+    repositories { mavenCentral() }
+}
+ext {
+    gdxVersion = '1.13.1'
+    gwtVersion = '2.11.0'
+    junitVersion = '5.11.4'
+}
+subprojects {
+    apply plugin: 'java'
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+        options.release = 8
+    }
+    tasks.withType(Test).configureEach {
+        useJUnitPlatform()
+        testLogging { events 'failed', 'skipped'; exceptionFormat 'full' }
+    }
+}

@@ -1,0 +1,20 @@
+apply plugin: 'application'
+application { mainClass = 'jp.terminalquest.lwjgl3.Lwjgl3Launcher' }
+dependencies {
+    implementation project(':core')
+    implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+    runtimeOnly "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+}
+tasks.named('run', JavaExec) {
+    workingDir = rootProject.file('assets')
+    if (System.getProperty('os.name').toLowerCase().contains('mac')) jvmArgs '-XstartOnFirstThread'
+}
+tasks.named('jar', Jar) {
+    dependsOn configurations.runtimeClasspath
+    manifest { attributes 'Main-Class': application.mainClass.get() }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    from(rootProject.file('assets'))
+    exclude 'META-INF/*.SF', 'META-INF/*.RSA', 'META-INF/*.DSA'
+    archiveBaseName = 'terminal-quest-desktop'
+}

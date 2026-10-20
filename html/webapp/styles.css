@@ -1,0 +1,5 @@
+html, body { margin: 0; width: 100%; height: 100%; background: #080f1c; overflow: hidden; color: #e2edf8; font-family: monospace; }
+#embed-html { width: 100%; height: 100%; }
+canvas { display: block; outline: none; }
+#mobile-note { display: none; position: fixed; bottom: 0; left: 0; right: 0; padding: 12px; background: #122538; color: #96f5cd; font-size: 12px; text-align: center; pointer-events: none; }
+@media (max-width: 800px), (pointer: coarse) { #mobile-note { display: block; } }
